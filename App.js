@@ -13,8 +13,8 @@ export default function App() {
     async function carregarFilmes() {
       if (pesquisa.trim() !== '') {
         try {
-          const res = await api.get(pesquisa.replace('', '%20'))
-          setFilmes(res.data)
+          const response = await api.get(pesquisa.replace(' ', '%20'))
+          setFilmes(response.data)
         } catch (err) {
           console.error('erro na requisição: ', err)
         }
@@ -52,7 +52,7 @@ export default function App() {
             >{filme.show.image && (
               <Image
                 source={{ uri: filme.show.image.medium }}
-                style={globalStyles.image}
+                style={globalStyles.imagem}
                 resizeMode='cover'
               />
             )}
@@ -74,39 +74,4 @@ export default function App() {
       </SafeAreaView>
     </SafeAreaProvider>
   )
-
-  // return(
-  //   <SafeAreaView style={globalStyles.container}>
-  //     <TextInput style={globalStyles.input}
-  //       placeholder="Digite o nome do filme"
-  //       value={pesquisa}
-  //       onChangeText={handlePesquisa}
-  //     />
-  //     <Text style={globalStyles.titulo}>Resultados(s) da pesquisa</Text>
-
-  //     <ScrollView>
-  //       {filmes.map((filme) => {
-  //         <View key={filme.show.id style={globalStyles.card>
-  //         {
-  //           filme.show.image && (
-  //             <Image
-  //               source={{ uri: filme.show.image.medium }}
-  //               style={globalStyles.imagem}
-  //               resizeMode='cover'
-  //             />
-  //           )
-  //         }
-  //           <View style={globalStyles.infoContainer}>
-  //             <Text style={globalStyles.tituloFilme}>
-  //               {filme.show.name}
-  //             </Text>
-  //             <Text style={globalStyles.url}>
-  //             {filme.show.url}
-  //             </Text>
-  //           </View>
-  //         </View>
-  //       })}
-  //     </ScrollView>
-  //   </SafeAreaView>
-  // )
 }
